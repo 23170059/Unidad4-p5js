@@ -1,3 +1,4 @@
+//Angel Gabriel Acosta Zazueta
 let angulo = 0;
 
 let img;
