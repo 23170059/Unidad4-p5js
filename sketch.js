@@ -1,16 +1,28 @@
 let angulo = 0;
 
-function setup() {
+let img;
 
-    createCanvas(1000, 600, WEBGL);
+function preload(){
 
+    img = loadImage(
+        'https://upload.wikimedia.org/wikipedia/commons/3/3c/Texture_example.jpg'
+    );
 }
 
-function draw() {
+function setup(){
+
+    createCanvas(1100, 650, WEBGL);
+}
+
+function draw(){
 
     background(20);
 
     orbitControl();
+
+    // -------------------------
+    // ILUMINACIÓN
+    // -------------------------
 
     // Luz ambiental
     ambientLight(50);
@@ -25,7 +37,7 @@ function draw() {
         -1
     );
 
-    // Luz puntual controlada con mouse
+    // Luz puntual con mouse
     pointLight(
         255,
         200,
@@ -35,47 +47,77 @@ function draw() {
         200
     );
 
-    // Esfera brillante
+    // -------------------------
+    // ESFERA BRILLANTE
+    // -------------------------
+
     push();
 
-    translate(-250, 0, 0);
+    translate(-350, 0, 0);
+
+    rotateY(angulo);
 
     specularMaterial(255);
 
     shininess(100);
 
-    rotateY(angulo);
-
     sphere(100);
 
     pop();
 
-    // Cubo mate
+    // -------------------------
+    // CUBO MATE
+    // -------------------------
+
     push();
 
     translate(0, 0, 0);
 
+    rotateX(angulo);
+
     ambientMaterial(200, 80, 80);
+
+    box(170);
+
+    pop();
+
+    // -------------------------
+    // OBJETO CON TEXTURA
+    // -------------------------
+
+    push();
+
+    translate(350, 0, 0);
+
+    rotateY(angulo);
+
+    texture(img);
+
+    box(170);
+
+    pop();
+
+    // -------------------------
+    // OBJETO CON NORMALES
+    // -------------------------
+
+    push();
+
+    translate(0, 220, 0);
 
     rotateX(angulo);
 
-    box(150);
-
-    pop();
-
-    // Toro con normales
-    push();
-
-    translate(250, 0, 0);
+    rotateY(angulo);
 
     normalMaterial();
 
-    rotateZ(angulo);
-
-    torus(80, 25);
+    torus(90, 30);
 
     pop();
 
-    // Incremento de animación
+    // -------------------------
+    // ANIMACIÓN
+    // -------------------------
+
     angulo += 0.01;
 }
